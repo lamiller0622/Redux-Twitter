@@ -12,8 +12,8 @@ function Tweet ({users, tweets}) {
                         <div className='tweetauthor'>{tweet.Tweetauthor}</div>
                         <div className='timestamp'>{tweet.timestamp}</div>
                         <div className='tweettext'>{tweet.text}</div>
-                        <div className='likes'>{tweet.likes}</div>
-                        <div>user</div>
+                        <div className='likes'>{tweet.likes} likes</div>
+                        
                     </div>
                 </li>
             ))}
@@ -31,7 +31,7 @@ function mapStateToProps ({tweets, users}) {
                     text,
                     Tweetauthor: users[author].name,
                     timestamp: formatDate(timestamp),
-                    likes,
+                    likes: likes.length,
                     AuthorAvatar : users[author].avatarURL,
                     parentTweet: replyingto,
                     replies
