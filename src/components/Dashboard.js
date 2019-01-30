@@ -8,14 +8,22 @@ class Dashboard extends Component {
         return (
             <div>
                 <h3 className='center'>Your Timeline</h3>
-                <Tweet />
+                <ul>
+                    {this.props.tweetIds.map((id) => (
+                        <li key={id}>
+                            <Tweet id={id} />
+                        </li>
+                    ))}
+                </ul>
             </div>
         )
     }
 }
 
 function mapStateToProps ({tweets}) {
-    return {tweetIds: Object.keys(tweets)}
+    return {tweetIds: Object.keys(tweets)
+        .sort((a,b) => tweets[b].timestamp - tweets[a].timestamp)
+    }
 }
 
 export default connect(mapStateToProps)(Dashboard)

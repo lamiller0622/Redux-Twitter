@@ -13,10 +13,19 @@ class App extends Component {
     return (
       <Fragment>
         <LoadingBar />
-        <Dashboard />
+        {this.props.loading ===true
+          ? null
+          : <Dashboard />}
       </Fragment>
     )
   }
 }
 
-export default connect()(App)
+
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser ===null
+  }
+}
+
+export default connect(mapStateToProps)(App)

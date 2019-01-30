@@ -14,7 +14,7 @@ function addTweet ({ authedUser, id, tweet }) {
     }
 }
 
-function likeToggle (authedUser, hasLiked, id) {
+function likeToggle ({authedUser, hasLiked, id}) {
     return {
         type: LIKE_TOGGLE,
         authedUser,
@@ -39,12 +39,12 @@ export function receiveTweet (tweets) {
     }
 }
 
-export function handleLikeToggle ( authedUser, hasLiked, id) {
+export function handleLikeToggle ( tweetdata) {
     return (dispatch) => {
-        dispatch(likeToggle(authedUser, hasLiked, id))
-        return saveLikeToggle(authedUser, hasLiked, id)
-            .catch(() => {
-                dispatch(likeToggle(authedUser, hasLiked, id))
+        dispatch(likeToggle(tweetdata))
+        return saveLikeToggle(tweetdata)
+            .catch((e) => {
+                dispatch(likeToggle(tweetdata))
                 alert('An error occurred. Try again.')
             })
     }
