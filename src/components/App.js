@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import LoadingBar from 'react-redux-loading'
 import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux'
@@ -11,7 +11,10 @@ class App extends Component {
   }
   render() {
     return (
-      <Tweet />
+      <Fragment>
+        <LoadingBar />
+        <Dashboard />
+      </Fragment>
     )
   }
 }
