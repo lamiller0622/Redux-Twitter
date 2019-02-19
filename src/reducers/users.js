@@ -8,16 +8,7 @@ export default function users ( state = {}, action ) {
                 ...state,
                 ...action.users,
             }
-        case ADD_TWEET :
-            const tweet = action.tweet
-            const { author, id } = tweet
-            return {
-                ...state,
-                [author]: {
-                    ...state[author],
-                    tweets: state[author].tweets.concat([id])
-                }
-            }
+        
         
         default:
             return state

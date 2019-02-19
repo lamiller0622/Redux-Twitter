@@ -5,11 +5,9 @@ export const ADD_TWEET = 'ADD_TWEET'
 export const RECEIVE_TWEET = 'RECEIVE_TWEET'
 export const LIKE_TOGGLE = 'LIKE_TOGGLE'
 
-function addTweet ({ authedUser, id, tweet }) {
+function addTweet (tweet) {
     return {
         type: ADD_TWEET,
-        authedUser,
-        id,
         tweet
     }
 }
@@ -23,11 +21,16 @@ function likeToggle ({authedUser, hasLiked, id}) {
     }
 }
 
-export function handleAddTweet (tweetdata) {
-    return (dispatch) => {
+export function handleAddTweet (text, replyingTo) {
+    return (dispatch, getState) => {
+        const { authedUser } = getState()
         dispatch(showLoading())
-        return saveTweet(tweetdata)
-            .then(() => dispatch(addTweet(tweetdata)))
+        return saveTweet({
+            text,
+            author: authedUser,
+            replyingTo
+        })
+            .then((text) => dispatch(addTweet(text)))
             .then(() => dispatch(hideLoading()))
     }
 }
